@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
+//引入action
+import {
+	createIncrementAction,
+	createDecrementAction,
+	createIncrementAsyncAction
+} from '../../redux/actions/count'
+//引入connect用于连接UI组件与redux
+import {connect} from 'react-redux'
 
-export default class Count extends Component {
+//定义UI组件
+class Count extends Component {
 
 	state = {carName:'奔驰c63'}
 
@@ -31,7 +40,8 @@ export default class Count extends Component {
 		//console.log('UI组件接收到的props是',this.props);
 		return (
 			<div>
-				<h1>当前求和为：{this.props.count}</h1>
+				<h2>我是Count组件,下方组件总人数为:{this.props.renshu}</h2>
+				<h4>当前求和为：{this.props.count}</h4>
 				<select ref={c => this.selectNumber = c}>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -45,3 +55,17 @@ export default class Count extends Component {
 		)
 	}
 }
+
+//使用connect()()创建并暴露一个Count的容器组件
+export default connect(
+	state => ({
+		count:state.he,
+		renshu:state.rens.length
+	}),
+	{
+		jia:createIncrementAction,
+		jian:createDecrementAction,
+		jiaAsync:createIncrementAsyncAction,
+	}
+)(Count)
+
