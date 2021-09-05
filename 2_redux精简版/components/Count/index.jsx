@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 import { Button, Space, Select } from 'antd'
 // 引入store，用于获取redux中保存的状态
 import store from '../../redux/store'
-// 引入actionCreator，专门用于创建action对象
-import {
-  createIncrementAction,
-  createDecrementAction,
-} from '../../redux/count_ac_creator'
 import './index.css'
 const { Option } = Select
 
@@ -25,18 +20,15 @@ export default class Count extends Component {
     this.setState({ num: value })
   }
   increment = () => {
-    // store.dispatch({ type: 'increment', data: this.state.num - 0 })
-    store.dispatch(createIncrementAction(this.state.num - 0))
+    store.dispatch({ type: 'increment', data: this.state.num - 0 })
   }
   decrement = () => {
-    // store.dispatch({ type: 'decrement', data: this.state.num - 0 })
-    store.dispatch(createDecrementAction(this.state.num - 0))
+    store.dispatch({ type: 'decrement', data: this.state.num - 0 })
   }
   decrementIfOdd = () => {
     const count = store.getState()
     if (count % 2 !== 0) {
-      // store.dispatch({ type: 'increment', data: this.state.num - 0 })
-      store.dispatch(createIncrementAction(this.state.num - 0))
+      store.dispatch({ type: 'increment', data: this.state.num - 0 })
     }
   }
   render() {
